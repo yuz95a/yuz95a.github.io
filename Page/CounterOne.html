@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>버튼 클릭 카운터</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .label {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        .button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="label">총 클릭 수: <span id="totalClicks">0</span></div>
+        <button class="button" id="clickButton">버튼을 눌러보세요!</button>
+    </div>
+
+    <script>
+        // localStorage에서 총 클릭 수를 가져오기
+        const totalClicks = localStorage.getItem('totalClicks') || 0;
+        document.getElementById('totalClicks').innerText = totalClicks;
+
+        // 버튼 클릭 시 이벤트 핸들러
+        document.getElementById('clickButton').addEventListener('click', function() {
+            // localStorage에서 현재 클릭 수 가져오기
+            let currentClicks = localStorage.getItem('totalClicks') || 0;
+            currentClicks = parseInt(currentClicks, 10) + 1;
+
+            // 클릭 수를 localStorage에 저장하기
+            localStorage.setItem('totalClicks', currentClicks);
+
+            // 레이블 업데이트
+            document.getElementById('totalClicks').innerText = currentClicks;
+
+            // 버튼 텍스트 업데이트
+            this.innerText = `클릭 횟수: ${currentClicks}`;
+        });
+    </script>
+</body>
+</html>
